@@ -6,6 +6,10 @@ The goal of our project is to be able to create a system that makes drawings sim
 
 Reference for concept: https://www.line-us.com/
 
+![test](CAD.png)
+
+Figure 1. CAD of concept drawing robot
+
 # Bill of Materials
 
 | Qty. | Part                    | Source                | Est. Cost |
