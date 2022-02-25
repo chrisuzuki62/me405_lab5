@@ -10,7 +10,7 @@
                         The repository for all the files can be found at https://github.com/chrisuzuki62/me405_termproject
 
    @section sec_design     Software Design
-                           Two files currently:User main, Read G code
+                           Two files currently: User main, Read G code
    
 
    @subsection sec_task Task Diagram
