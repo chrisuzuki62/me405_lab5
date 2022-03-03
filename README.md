@@ -20,11 +20,15 @@ Figure 1. CAD of concept drawing robot
 |:----:|:----------------------  |:----------------------|:---------:|
 |  2   | ME405 Pittman DC Motors | ME405 Tub             |     -     |
 |  1   | Nucleo Board with Shoe  | ME405 Tub             |     -     |
-|  1   | Tower Pro MG995 Servo   | Robotics Lab          |     -     |
+|  1   | Tower Pro MG995 Servo   | Robotics Club         |     -     |
 |  1   | Pen                     | Someone on Team       |     -     |
 |  1   | PLA 3D Filament         | Someone on Team       |     -     |
-|  1   | Acrylic                 | A Dumpster Somewhere  |     -     |
-
+|  8   | M3-8mm Screws           | REV Robotics          |     -     |
+|  2   | KHK-BSS0.5-60B Gears    | Robotics Club         |     -     |
+|  3   | ID 6mm OD 17mm Bearing  | Robotics Club         |     -     |
+|  2   | Stainless Bars Tools    | Robotics Club         |     -     |
+|  2   | M4 Screws               | Robotics Club         |     -     |
+|  2   | M4 Screws               | Robotics Club         |     -     |
 
 # Software Design
 An overview of the software design. This should be brief and general, with a link to your Doxygen pages -- the pages describe the details of the software, so there's no need to repeat that here.
