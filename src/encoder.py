@@ -58,6 +58,9 @@ class Encoder:
         
             ## Sets the second channel that the encoder will use to track time
             self.ch2 = self.timer.channel(2,pyb.Timer.ENC_AB, pin=self.Pin2)
+            
+            ## Set the constant to flip delta negative if appropriate for encoder 1
+            self.constant = 1
 
         elif enc_num == 2:
             
@@ -75,6 +78,9 @@ class Encoder:
             ## Sets one channel that the encoder will use to track time
             self.ch2 = self.timer.channel(2,pyb.Timer.ENC_AB, pin=self.Pin2)
             
+            ## Set the constant to flip delta negative if appropriate for encoder 2
+            self.constant = -1
+            
         ## Set the encoder number as an instance variable    
         self.enc_num = enc_num
             
@@ -86,6 +92,7 @@ class Encoder:
         
         ## Variable to represent the current position
         self.current_pos = 0
+        
 
     def read(self):
         '''!
@@ -101,7 +108,7 @@ class Encoder:
         
         ## defines the delta as the difference between the encoder reading and the
         ## last recorded position of the encoder
-        self.delta = self.pos_2 - self.pos_1
+        self.delta = (self.pos_2 - self.pos_1) * self.constant
         
         if self.delta > 0 and self.delta > self.period/2:
             self.delta -= self.period
@@ -121,7 +128,7 @@ class Encoder:
         if self.enc_num == 1:
             self.current_pos = 7680 * 0
         elif self.enc_num == 2:
-            self.current_pos = 7680 * 2
+            self.current_pos = 7680 * -2
 
 
 ## main testing encoder code

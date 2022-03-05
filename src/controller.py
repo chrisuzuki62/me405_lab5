@@ -86,21 +86,23 @@ if __name__ == '__main__':
     start_time = time.time()
     
     # Create motor, encoder, and controller objects
-    mtr1 = motor.Motor(1)
-    enc1 = encoder.Encoder(1)
+    mtr1 = motor.Motor(2)
+    enc1 = encoder.Encoder(2)
     ctr = Controller()
     
     # Enable motor
     mtr1.enable()
     
+    enc1.zero()
+    
     # Set desired gain and position
     ctr.set_gain(0.1)
-    ctr.set_position(16300)
+    ctr.set_position(0)
     
     # Run the controller for two seconds
     while time.time() - start_time < 2:
         power = ctr.update(enc1.read())
-        mtr1.set_duty_cycle(power)
+        mtr1.set_duty_cycle(-1 * power)
         print(enc1.read())
     
     # Disable motor after two seconds

@@ -31,7 +31,7 @@ def motor2_task():
     while True:
         ctr2.set_position(theta2.get())
         duty2 = ctr2.update(enc2.read())
-        mtr2.set_duty_cycle(duty2)
+        mtr2.set_duty_cycle(duty2 * -1)
         yield(0)
 
 """
@@ -49,58 +49,60 @@ def user_task():
         yield(0)
 """
         
-        
 def plotter_task():
-    
-    ## Read the HPGL file
-    with open('Square-Logo-2009.hpgl', 'r') as file:
-        ## Split the contents of the HPGL into IN, PU, PD, etc...
-        steps = file.read().split(';')
-            
+    not_finished = True
+    buffer = ""
     while True:
-        
-        for idx in steps:
-            
-            if idx[0:2] == "IN":
-                print("Initializing")
+        with open('Test.hpgl', 'r') as file:
+            while not_finished:
+                boolean = True
+                # Have a buffer that collects all the strings
+                while boolean:
+                    char = file.read(1)
+                    if char == "":
+                        not_finished = False
+                        boolean = False
+                    elif char == ";":
+                        boolean = False
+                    else:
+                        buffer += char
                 
-            elif idx[0:2] == "PU":
-                print("Pen Up")
-                coord = idx[2::].split(',')
-                if len(coord) != 0:
-                    # print(coord)
+                if buffer[0:2] == "IN":
+                    pass
+                    
+                elif buffer[0:2] == "PU":
+                    pass
+                    
+                elif buffer[0:2] == "PD":
+                    pass   
+                    
+                elif buffer[0:2] == "SP":
+                    pass
+                    
+                coord = buffer[2::].split(',')
+                if len(coord) >= 2:
                     x = 0
                     y = 1
                     for pp in range(len(coord)//2):
                         x_plot = (int(coord[x]) / max_hpgl * draw_width) + draw_zero_x
                         y_plot = (int(coord[y]) / max_hpgl * draw_height) + draw_zero_y
                         thetas = Ink.IK(x_plot, y_plot)
+                        print(thetas[0], thetas[1])
                         theta1.put(thetas[0] * enc_ticks_per_rev * teeth_ratio / 360)
-                        theta2.put(thetas[1] * enc_ticks_per_rev * teeth_ratio / 360)
+                        theta2.put((thetas[1] - 180) * enc_ticks_per_rev * teeth_ratio / 360)
                         x += 2
                         y += 2
                         
                         yield(0)
+                        
+                        ctr1.set_gain(0.10)
+                        ctr2.set_gain(0.10)
+                        
+                buffer = ""
+                boolean = True
                 
-            elif idx[0:2] == "PD":
-                print("Pen Down")
-                coord = idx[2::].split(',')
-                if len(coord) != 0:
-                    x = 0
-                    y = 1
-                    for pp in range(len(coord)//2):
-                        x_plot = (int(coord[x]) / max_hpgl * draw_width) + draw_zero_x
-                        y_plot = (int(coord[y]) / max_hpgl * draw_height) + draw_zero_y
-                        thetas = Ink.IK(x_plot, y_plot)
-                        theta1.put(thetas[0] * enc_ticks_per_rev * teeth_ratio / 360)
-                        theta2.put(thetas[1] * enc_ticks_per_rev * teeth_ratio / 360)
-                        x += 2
-                        y += 2
-                        
-                        yield(0)
-
+                yield(0)
         yield(0)
-
 
 # This code creates a share, a queue, and two tasks, then starts the tasks. The
 # tasks run until somebody presses ENTER, at which time the scheduler stops and
@@ -132,13 +134,13 @@ if __name__ == "__main__":
     teeth_ratio = 60/16
     
     # Set up drawing location with both actuation linkages at (0,0)
-    draw_width = 6                    # inches
-    draw_height = 6                   # inches
+    draw_width = 4                    # inches
+    draw_height = 4                   # inches
 
-    draw_zero_x = 2                   # inches
-    draw_zero_y = draw_height / -2    # inches
+    draw_zero_x = 4                   # inches
+    draw_zero_y = -2 # draw_height / -2    # inches
     
-    max_hpgl = 25_000
+    max_hpgl = 10_000
     
     # Desired positions in ticks
     des_theta_1 = task_share.Share ('h', thread_protect = False, name = "Desired Theta 1")
@@ -167,10 +169,10 @@ if __name__ == "__main__":
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
     task1 = cotask.Task (motor1_task, name = 'Motor_Task_1', priority = 2, 
-                         period = 10, profile = True, trace = False)
-    task2 = cotask.Task (motor2_task, name = 'Motor_Task_2', priority = 2, 
-                         period = 10, profile = True, trace = False)
-    task3 = cotask.Task (plotter_task, name = 'Plotter_Task', priority = 1, 
+                         period = 5, profile = True, trace = False)
+    task2 = cotask.Task (motor2_task, name = 'Motor_Task_2', priority = 1, 
+                         period = 5, profile = True, trace = False)
+    task3 = cotask.Task (plotter_task, name = 'Plotter_Task', priority = 0, 
                          period = 100, profile = True, trace = False)
     cotask.task_list.append (task1)
     cotask.task_list.append (task2)

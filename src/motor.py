@@ -148,7 +148,7 @@ if __name__ == '__main__':
             elif ser == b'p\r\n':
                 break
             
-    
+    """
     # Manual input of Motor 1 duty cycle
     motor1.set_duty_cycle(50)
     # Manual input of Motor 2 duty cycle
@@ -156,10 +156,11 @@ if __name__ == '__main__':
     
     # Set the amount of time for motors to run [s]
     time.sleep(2)
-    
+    """
     
     # Calling Motor 1 disable method to disable Motor 1
     motor1.disable()
     # Calling Motor 2 disable method to disable Motor 2
     motor2.disable()
+    w
     
