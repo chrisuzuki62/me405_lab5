@@ -62,6 +62,11 @@ class Motor:
             self.ch1 = self.timer.channel(1, pyb.Timer.PWM, pin=self.Pin1)
             ## Object for Motor 2, channel 2 corresponding to Pin 1
             self.ch2 = self.timer.channel(2, pyb.Timer.PWM, pin=self.Pin2)
+        
+        elif motor_num == 3: ## Servo
+            Pin1 = pyb.Pin(pyb.Pin.board.PA9, pyb.Pin.OUT_PP)
+            timer = pyb.Timer(1, period = 20000-1, prescaler = 80-1)  
+            self.ch1 = timer.channel(2, pyb.Timer.PWM, pin = Pin1)            
             
     def enable(self):
         """! 
@@ -76,7 +81,15 @@ class Motor:
         @details    This method disables the motor by setting the enable pin to low
         """
         self.enable_pin.low()
-
+    
+    def set_servo_pos (self, position)
+        self.pos = position
+        if self.pos > 180
+            self.pos = 180
+        elif self.pos < 0
+            self.pos = 0
+        self.ch1.pulse_width(1500+(1000/90)*self.pos)
+    
     def set_duty_cycle (self, level):
         '''!
         @brief      Sets the motor duty cycle

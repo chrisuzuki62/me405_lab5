@@ -19,6 +19,7 @@ import inversekinematic
 import controller
 import motor
 import encoder
+
         
 def motor1_task():
     while True:
@@ -71,9 +72,11 @@ def plotter_task():
                     pass
                     
                 elif buffer[0:2] == "PU":
+                    servo.set_servo_pos(0)
                     pass
                     
                 elif buffer[0:2] == "PD":
+                    servo.set_servo_pos(180)
                     pass   
                     
                 elif buffer[0:2] == "SP":
@@ -107,20 +110,22 @@ def plotter_task():
 # This code creates a share, a queue, and two tasks, then starts the tasks. The
 # tasks run until somebody presses ENTER, at which time the scheduler stops and
 # printouts show diagnostic information about the tasks, share, and queue.
+
 if __name__ == "__main__":
     
-    """
+
+    
+    
     q0 = task_share.Queue ('L', 16, thread_protect = False, overwrite = False,
                            name = "Queue 0")
-    """
+                           
     ######################################################################################
     
     # Create motor and encoder objects
     
     mtr1 = motor.Motor(1)
     mtr2 = motor.Motor(2)
-    
-    
+    servo = motor.Motor(3)
     
     enc1 = encoder.Encoder(1)
     enc2 = encoder.Encoder(2)
@@ -168,6 +173,7 @@ if __name__ == "__main__":
     # allocated for state transition tracing, and the application will run out
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
+    
     task1 = cotask.Task (motor1_task, name = 'Motor_Task_1', priority = 2, 
                          period = 5, profile = True, trace = False)
     task2 = cotask.Task (motor2_task, name = 'Motor_Task_2', priority = 1, 
@@ -199,3 +205,4 @@ if __name__ == "__main__":
     print (task_share.show_all ())
     print (task1.get_trace ())
     print ('\r\n')
+    
