@@ -19,6 +19,7 @@ import inversekinematic
 import controller
 import motor
 import encoder
+import utime
 
         
 def motor1_task():
@@ -34,6 +35,7 @@ def motor2_task():
         duty2 = ctr2.update(enc2.read())
         mtr2.set_duty_cycle(duty2 * -1)
         yield(0)
+        
 
 """
 def user_task():
@@ -62,7 +64,7 @@ def plotter_task():
     while True:
         
         ## A variable for the HPGL file using the 'with open' function
-        with open('Test.hpgl', 'r') as file:
+        with open('S.hpgl', 'r') as file:
             
             # This loop encapsulates the finite state machine
             while not_finished:
@@ -84,15 +86,15 @@ def plotter_task():
                     
                 elif buffer[0:2] == "PU":
                     print("Setting Pen Up")
-                    servo.set_servo_pos(0)
+                    servo.set_servo_pos(20)
                     # Set the deadline to resume the FSM after 500ms
-                    deadline = utime.ticks_add(utime.ticks_ms(), 500)
+                    deadline = utime.ticks_add(utime.ticks_ms(), 1000)
                     
                 elif buffer[0:2] == "PD":
                     print("Setting Pen Down")
-                    servo.set_servo_pos(180)
+                    servo.set_servo_pos(0)
                     # Set the deadline to resume the FSM after 500ms
-                    deadline = utime.ticks_add(utime.ticks_ms(), 500)
+                    deadline = utime.ticks_add(utime.ticks_ms(), 1000)
 
                 
                 ###################################################
@@ -118,8 +120,9 @@ def plotter_task():
                         
                         yield(0)
                         
-                        ctr1.set_gain(0.10)
-                        ctr2.set_gain(0.10)
+                        ## 0.12 for star
+                        ctr1.set_gain(0.12)
+                        ctr2.set_gain(0.12)
                         
                 buffer = ""
                 boolean = True
@@ -132,9 +135,6 @@ def plotter_task():
 # printouts show diagnostic information about the tasks, share, and queue.
 
 if __name__ == "__main__":
-    
-
-    
     
     q0 = task_share.Queue ('L', 16, thread_protect = False, overwrite = False,
                            name = "Queue 0")
@@ -159,13 +159,17 @@ if __name__ == "__main__":
     teeth_ratio = 60/16
     
     # Set up drawing location with both actuation linkages at (0,0)
-    draw_width = 4                    # inches
-    draw_height = 4                   # inches
+    
+    ## 5, 5 for star
+    draw_width = 6                    # inches
+    draw_height = 6                   # inches
 
-    draw_zero_x = 4                   # inches
+    ## use 5 for star
+    draw_zero_x = 7                   # inches
     draw_zero_y = -2 # draw_height / -2    # inches
     
-    max_hpgl = 10_000
+    # 6_000 for star
+    max_hpgl = 9_000
     
     # Desired positions in ticks
     des_theta_1 = task_share.Share ('h', thread_protect = False, name = "Desired Theta 1")
@@ -194,7 +198,7 @@ if __name__ == "__main__":
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
     
-    task1 = cotask.Task (motor1_task, name = 'Motor_Task_1', priority = 2, 
+    task1 = cotask.Task (motor1_task, name = 'Motor_Task_1', priority = 1, 
                          period = 5, profile = True, trace = False)
     task2 = cotask.Task (motor2_task, name = 'Motor_Task_2', priority = 1, 
                          period = 5, profile = True, trace = False)

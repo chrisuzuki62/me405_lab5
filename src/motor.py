@@ -84,11 +84,11 @@ class Motor:
     
     def set_servo_pos (self, position):
         self.pos = position
-        if self.pos > 180
+        if self.pos > 180:
             self.pos = 180
-        elif self.pos < 0
+        elif self.pos < 0:
             self.pos = 0
-        self.ch1.pulse_width(1500+(1000/90)*self.pos)
+        self.ch1.pulse_width(round(500+(1500/90)*self.pos))
     
     def set_duty_cycle (self, level):
         '''!
@@ -130,6 +130,8 @@ if __name__ == '__main__':
     # Object for Motor 2
     motor2 = Motor(2)
     
+    servo = Motor(3)
+    
     # Calling Motor 1 enable method to enable Motor 1
     motor1.enable()
     # Calling Motor 2 enable method to enable Motor 2
@@ -158,6 +160,10 @@ if __name__ == '__main__':
                 motor2.set_duty_cycle(-50)
                 time.sleep(0.1)
                 motor2.set_duty_cycle(0)
+            elif ser == b'r\r\n':
+                servo.set_servo_pos(0)
+            elif ser == b'f\r\n':
+                servo.set_servo_pos(20)
             elif ser == b'p\r\n':
                 break
             
@@ -175,5 +181,4 @@ if __name__ == '__main__':
     motor1.disable()
     # Calling Motor 2 disable method to disable Motor 2
     motor2.disable()
-    w
     
