@@ -51,11 +51,22 @@ def user_task():
 """
         
 def plotter_task():
+    ## A variable for a set time in the future to continue a task
+    deadline = utime.ticks_ms()
+    ## A variable representing whether the entire HPGL file has been read
     not_finished = True
+    ## A string buffer for each process in the HPGL file (Pen Up, Pen Down, etc.)
     buffer = ""
+    
+    # Create the over arching loop that continues to run even if the HPGL file is finished reading
     while True:
+        
+        ## A variable for the HPGL file using the 'with open' function
         with open('Test.hpgl', 'r') as file:
+            
+            # This loop encapsulates the finite state machine
             while not_finished:
+                ## A boolean variable representing whether to continue appending strings to the buffer
                 boolean = True
                 # Have a buffer that collects all the strings
                 while boolean:
@@ -69,18 +80,27 @@ def plotter_task():
                         buffer += char
                 
                 if buffer[0:2] == "IN":
-                    pass
+                    print("Initializing")
                     
                 elif buffer[0:2] == "PU":
+                    print("Setting Pen Up")
                     servo.set_servo_pos(0)
-                    pass
+                    # Set the deadline to resume the FSM after 500ms
+                    deadline = utime.ticks_add(utime.ticks_ms(), 500)
                     
                 elif buffer[0:2] == "PD":
+                    print("Setting Pen Down")
                     servo.set_servo_pos(180)
-                    pass   
-                    
-                elif buffer[0:2] == "SP":
+                    # Set the deadline to resume the FSM after 500ms
+                    deadline = utime.ticks_add(utime.ticks_ms(), 500)
+
+                
+                ###################################################
+                # This essentially freezes the program until the current time excededs the deadline
+                while utime.ticks_diff(deadline, utime.ticks_ms()) > 0:
                     pass
+                    yield(0)
+                ###################################################
                     
                 coord = buffer[2::].split(',')
                 if len(coord) >= 2:
@@ -90,7 +110,7 @@ def plotter_task():
                         x_plot = (int(coord[x]) / max_hpgl * draw_width) + draw_zero_x
                         y_plot = (int(coord[y]) / max_hpgl * draw_height) + draw_zero_y
                         thetas = Ink.IK(x_plot, y_plot)
-                        print(thetas[0], thetas[1])
+                        # print(thetas[0], thetas[1])
                         theta1.put(thetas[0] * enc_ticks_per_rev * teeth_ratio / 360)
                         theta2.put((thetas[1] - 180) * enc_ticks_per_rev * teeth_ratio / 360)
                         x += 2
