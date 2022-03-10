@@ -10,7 +10,7 @@ The goal of our project is to be able to create a system that makes drawings sim
 
 An overview of the hardware design.  We need to know about the hardware on which the software in your repository will operate.
 
-![test](CAD.png)
+![test](CAD.jpg)
 
 Figure 1. CAD of concept drawing robot
 
