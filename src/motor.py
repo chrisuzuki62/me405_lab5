@@ -82,7 +82,7 @@ class Motor:
         """
         self.enable_pin.low()
     
-    def set_servo_pos (self, position)
+    def set_servo_pos (self, position):
         self.pos = position
         if self.pos > 180
             self.pos = 180
