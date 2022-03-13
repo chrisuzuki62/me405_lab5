@@ -63,9 +63,12 @@ class Motor:
             ## Object for Motor 2, channel 2 corresponding to Pin 1
             self.ch2 = self.timer.channel(2, pyb.Timer.PWM, pin=self.Pin2)
         
-        elif motor_num == 3: ## Servo
+        elif motor_num == 3:
+            ## Pin responsible for the servo PWM signal 
             Pin1 = pyb.Pin(pyb.Pin.board.PA9, pyb.Pin.OUT_PP)
-            timer = pyb.Timer(1, period = 20000-1, prescaler = 80-1)  
+            ## The appropriate timer for the pin
+            timer = pyb.Timer(1, period = 20000-1, prescaler = 80-1)
+            ## The appropriate channel for the timer
             self.ch1 = timer.channel(2, pyb.Timer.PWM, pin = Pin1)            
             
     def enable(self):
@@ -83,6 +86,13 @@ class Motor:
         self.enable_pin.low()
     
     def set_servo_pos (self, position):
+        """!
+        @brief      Sets the position of the servo
+        @details    This method takes in an aargument in the form of degrees and will set the servo position accordingly
+        @param position Desired position of the servo motor in degrees
+        """
+        
+        ## Desired position of the servo
         self.pos = position
         if self.pos > 180:
             self.pos = 180
@@ -167,15 +177,6 @@ if __name__ == '__main__':
             elif ser == b'p\r\n':
                 break
             
-    """
-    # Manual input of Motor 1 duty cycle
-    motor1.set_duty_cycle(50)
-    # Manual input of Motor 2 duty cycle
-    motor2.set_duty_cycle(50)
-    
-    # Set the amount of time for motors to run [s]
-    time.sleep(2)
-    """
     
     # Calling Motor 1 disable method to disable Motor 1
     motor1.disable()
