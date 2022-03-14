@@ -3,7 +3,7 @@
 # System Description
 An introduction to your project. What is the purpose of the device you have created? For whose use is it intended?
 
-The goal of our project is to be able to create a system that makes drawings similar to a plotter. Our system will accomplish the goal of creating a drawing and also allows for curved motion directly through the motion of the arm.
+The goal of our project is to be able to create a system that makes drawings similar to a plotter. Our system will accomplish the goal of creating a drawing and also allows for curved motion directly through the motion of the arm. Any user using 
 
 
 # Hardware Design
