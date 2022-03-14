@@ -37,7 +37,7 @@ An overview of the software design. This should be brief and general, with a lin
 A discussion of the results.  How did you test your system?  How well has your system performed in these tests?
 A brief discussion of what you've learned about the project and recommendations for anyone who would like to build upon your work. This does not mean a discussion of what you learned about mechatronics in general; that belongs in other places.  It is a discussion of what worked well and what didn't for this device.
 
-The final demonstration video can be seen here:
+The final demonstration video can be seen here: https://youtu.be/_0DGsNZlUL0
 
 From the video and other tests we found that our system overall was able to perform its task to replicate the digital drawings. We had the Swing bot draw two images, one being a star and the other being a graffiti style S.
 
