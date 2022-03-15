@@ -7,7 +7,7 @@ The goal of our project is to create a 2.5 degree of freedom pen plotter that do
 
 # Hardware Design
 
-Our system consists of a robot arm-type system inspired by the Line-us drawing robot. We will use the two Pittman DC geared motors found in the ME405 tubs to control a set of four linkages. The two motors will me mounted inline vertically, facing each other, and connect at the center location to two of the linkages. A Tower Pro MG995 servo motor borrowed from the robotics lab will be used to control an up and down movement to raise and lower the pen from the drawing surface. We will have a 2.5 degree of freedom system with two degrees of freedom from the two DC geared motors and a half degree of freedom from the servo motor to raise and lower the system. The four linkages form a semi-diamond shape that creates a robot arm that functions similarly to a SCARA-type robot arm. We plan on 3D printing the linkages from PLA plastic. The motors will be mounted on a 3D-printed frame. Additional components required for the up and down movement of the system will also be 3D-printed. Gears and bearings will be added to improve the resolution and smoothness of our robot's movements. The current design of the Drawing bot is seen in Figure 1. below.
+Our system consists of a robot arm-type system inspired by the Line-us drawing robot. We will use the two Pittman DC geared motors found in the ME405 tubs to control a set of four linkages. The two motors will me mounted inline vertically, facing each other, and connect at the center location to two of the linkages. A Tower Pro SG90 servo motor borrowed from the robotics lab will be used to control an up and down movement to raise and lower the pen from the drawing surface. We will have a 2.5 degree of freedom system with two degrees of freedom from the two DC geared motors and a half degree of freedom from the servo motor to raise and lower the system. The four linkages form a semi-diamond shape that creates a robot arm that functions similarly to a SCARA-type robot arm. We plan on 3D printing the linkages from PLA plastic. The motors will be mounted on a 3D-printed frame. Additional components required for the up and down movement of the system will also be 3D-printed. Gears and bearings will be added to improve the resolution and smoothness of our robot's movements. The current design of the Drawing bot is seen in Figure 1. below.
 
 
 ![test](CAD.JPG)
@@ -20,7 +20,7 @@ Figure 1. CAD of concept Drawing Bot
 |:----:|:----------------------  |:----------------------|:---------:|
 |  2   | ME405 Pittman DC Motors | ME405 Tub             |     -     |
 |  1   | Nucleo Board with Shoe  | ME405 Tub             |     -     |
-|  1   | Tower Pro MG995 Servo   | Robotics Club         |     -     |
+|  1   | Tower Pro SG90 Servo   | Robotics Club         |     -     |
 |  1   | Pen                     | Someone on Team       |     -     |
 |  1   | PLA 3D Filament         | Someone on Team       |     -     |
 |  8   | M3-8mm Screws           | REV Robotics          |     -     |
