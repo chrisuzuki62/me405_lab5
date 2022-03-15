@@ -12,7 +12,7 @@
    @section sec_design      Software Design
                             
     
-    @subsection sec_1 OverView
+    @subsection sec_1 Overview 
     Our program is written in micropython and uses asynchronous cooperative multitasking to run the tasks needed for <br>
     our 2D pen plotter which include the following files: <br><br>
     <b>controller.py</b> - Provides proportional controller for the motors <br>
@@ -21,7 +21,7 @@
     <b>main.py</b> - Main script to run our 2D pen plotter <br>
     <b>motor.py</b> - Motor driver for our Pittman DC motors and our Tower Pro SG90 servo motor <br>
     <b>S.hpgl</b> - HPGL file for the sketch of a grafitti style "S" <br><br>
-    The following files were provided by Dr. John R. Ridgley <br><br>
+    The following files were provided by Dr. John R. Ridgley: <br>
     <b>cotask.py</b> - Allows for asynchronous cooperative multitasking <br>
     <b>task_share.py</b> - Allows for shared variables between tasks <br><br>
     

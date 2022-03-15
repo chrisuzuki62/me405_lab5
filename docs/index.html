@@ -5,14 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Term Project: Term Project</title>
+<title>ME405 Term Project Li, Or, Suzuki: ME405 Term Project Li, Or, Suzuki</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -25,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Term Project
+   <div id="projectname">ME405 Term Project Li, Or, Suzuki
    </div>
   </td>
  </tr>
@@ -51,22 +47,6 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,7 +62,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Term Project </div></div>
+  <div class="headertitle"><div class="title">ME405 Term Project Li, Or, Suzuki </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="sec_rep"></a>
@@ -90,39 +70,65 @@ Repository</h1>
 <p >The repository for all the files can be found at <a href="https://github.com/chrisuzuki62/me405_termproject">https://github.com/chrisuzuki62/me405_termproject</a></p>
 <h1><a class="anchor" id="sec_design"></a>
 Software Design</h1>
-<p >Two files currently: User main, Read G code</p>
-<h2><a class="anchor" id="sec_task"></a>
+<h2><a class="anchor" id="sec_1"></a>
+Overview</h2>
+<p >Our program is written in micropython and uses asynchronous cooperative multitasking to run the tasks needed for <br  />
+ our 2D pen plotter which include the following files: <br  />
+<br  />
+ <b><a class="el" href="controller_8py.html" title="A module for proportional gain control.">controller.py</a></b> - Provides proportional controller for the motors <br  />
+ <b><a class="el" href="encoder_8py.html" title="A driver for reading from Quadrature Encoders.">encoder.py</a></b> - Encoder driver for our Pittman DC motors <br  />
+ <b><a class="el" href="inversekinematic_8py.html" title="Performs the inverse kinematic of the three-linkage plotter.">inversekinematic.py</a></b> - Inverse kinematic calculator for our four-bar linkage <br  />
+ <b><a class="el" href="main_8py.html" title="Runs the main program; creates all objects and tasks to read an HPGL file run a 2....">main.py</a></b> - Main script to run our 2D pen plotter <br  />
+ <b><a class="el" href="motor_8py.html" title="A driver for the motors in ME405 kit.">motor.py</a></b> - Motor driver for our Pittman DC motors and our Tower Pro SG90 servo motor <br  />
+ <b>S.hpgl</b> - HPGL file for the sketch of a grafitti style "S" <br  />
+<br  />
+ The following files were provided by Dr. John R. Ridgley: <br  />
+ <b><a class="el" href="cotask_8py.html" title="This file contains classes to run cooperatively scheduled tasks in a multitasking system.">cotask.py</a></b> - Allows for asynchronous cooperative multitasking <br  />
+ <b><a class="el" href="task__share_8py.html" title="This file contains classes which allow tasks to share data without the risk of data corruption by int...">task_share.py</a></b> - Allows for shared variables between tasks <br  />
+<br  />
+</p>
+<h2><a class="anchor" id="sec_2"></a>
 Task Diagram</h2>
+<p >The task digram, shown below in Figure 1, consists of three task contained within <a class="el" href="main_8py.html" title="Runs the main program; creates all objects and tasks to read an HPGL file run a 2....">main.py</a>: two motor tasks <br  />
+ and one plotter task. The plotter tasks is responsible for reading the HPGL file and calculating the inverse <br  />
+ kinematics for the two driven linkages on our pen plotter. After calculating the desired angular position for <br  />
+ each motor, the plotter task places those values in their respective shared variable for the two motor tasks to <br  />
+ read. The motor tasks simply read from the shared variable and runs a proportional controller to get to the <br  />
+ desired location.</p>
 <div class="image">
-<img src="TASK_DIAGRAM.jpg" alt=""/>
+<img src="TermTD.png" alt=""/>
 <div class="caption">
-Task Diagram</div></div>
-<h2><a class="anchor" id="sec_user"></a>
-User Finite State Diagram</h2>
+Figure 1: Term Project Task Diagram</div></div>
+<h2><a class="anchor" id="sec_3"></a>
+FSM for Plotter Task</h2>
+<p >The finite state machine (FSM) for the plotter task consists of six states: read HPGL, initialize, pen up, <br  />
+ pen down, calculate inverse kinematics, and finished/waiting. When the program is run, the plotter task <br  />
+ starts off reading a section of the HPGL file up to the first semicolon. The first two strings of each <br  />
+ section will determine which state the FSM will transition to next: "IN" for initialize, "PU" for lifting <br  />
+ the pen up, "PD" for setting the pen down, etc. At their respective state, the program will carry out a <br  />
+ function such as setting the appropriate duty cycle for the servo motor to lift the pen up. The FSM then <br  />
+ checks to see if there is any coordinate data following the first two strings. If there is coordinate data, <br  />
+ the program will take the coordinate and perform the inverse kinematics, using <a class="el" href="inversekinematic_8py.html" title="Performs the inverse kinematic of the three-linkage plotter.">inversekinematic.py</a>, and write <br  />
+ the desired encoder position into a shared object which will then be handled by the motor tasks. When the plotter <br  />
+ task finishes processing all the coordinate data, the FSM jumps back to the state where it reads the HPGL file <br  />
+ for the next set of instructions. Finally, when the program raches the end of the HPGL file, it simply enters a <br  />
+ waiting or finishd state. Please refer to Figure 2 below for the state transition diagram. <br  />
+</p>
 <div class="image">
-<img src="USER_TASK.jpg" alt=""/>
+<img src="TermTD.png" alt=""/>
 <div class="caption">
-FSM User</div></div>
-<h2><a class="anchor" id="sec_plot"></a>
-Plotter Finite State Diagram</h2>
-<div class="image">
-<img src="PLOTTER_TASK.jpg" alt=""/>
-<div class="caption">
-FSM Plotter</div></div>
+Figure 2: State Transition Diagram for Plotter Task</div></div>
 <dl class="section author"><dt>Author</dt><dd>Damond Li </dd>
 <dd>
 Chris Or </dd>
 <dd>
 Chris Suzuki</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>February 24, 2022 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>March 14, 2022 </dd></dl>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
 </body>
 </html>

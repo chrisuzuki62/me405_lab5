@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainpage_2epy_0',['mainpage.py',['../mainpage_8py.html',1,'']]]
+  ['basic_5ftasks_2epy_0',['basic_tasks.py',['../basic__tasks_8py.html',1,'']]]
 ];
