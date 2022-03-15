@@ -11,7 +11,11 @@
 
    @section sec_design     Software Design
                            Two files currently: User main, Read G code
-   
+                           A brief description of the overall organization of the software.  Which files do what?
+A discussion of the tasks and states in the software.  Of course, your task and state diagrams should be here, and
+they must reflect the actual task and state structure of your software.  If your actual software has improved from the design you presented nearly a month ago,
+the task and state diagrams must have changed as well.
+Additional information about your software as appropriate.
 
    @subsection sec_task Task Diagram
                                \image html TASK_DIAGRAM.jpg "Task Diagram"
@@ -26,7 +30,7 @@
    @author              Chris Or
    @author              Chris Suzuki
 
-   @date                February 24, 2022
+   @date                March 14, 2022
 
                         
                         
