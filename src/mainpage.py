@@ -18,13 +18,10 @@ the task and state diagrams must have changed as well.
 Additional information about your software as appropriate.
 
    @subsection sec_task Task Diagram
-                               \image html TASK_DIAGRAM.jpg "Task Diagram"
+                               \image html TP_Task_Diagram.png "Task Diagram"
    
-   @subsection sec_user User Finite State Diagram
-                               \image html USER_TASK.jpg "FSM User"
-   
-   @subsection sec_plot Plotter Finite State Diagram
-                                \image html PLOTTER_TASK.jpg "FSM Plotter"
+   @subsection sec_FSM Finite State Machine
+                               \image html TP_State_Transition_Diagram.png "Finite State Machine - State Transition Diagram"
    
    @author              Damond Li
    @author              Chris Or
