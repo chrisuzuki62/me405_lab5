@@ -35,7 +35,7 @@
     desired location.
     
     
-    \image html TermTD.png "Figure 1: Term Project Task Diagram"
+    \image html TP_Task_Diagram.png "Figure 1: Term Project Task Diagram"
     
     
     @subsection sec_3 FSM for Plotter Task
@@ -52,7 +52,7 @@
     for the next set of instructions. Finally, when the program raches the end of the HPGL file, it simply enters a <br>
     waiting or finishd state. Please refer to Figure 2 below for the state transition diagram. <br> 
 
-    \image html TermTD.png "Figure 2: State Transition Diagram for Plotter Task"
+    \image html TP_State_Transition_Diagram.png "Figure 2: State Transition Diagram for Plotter Task"
     
    
    @author              Damond Li
