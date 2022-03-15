@@ -27,8 +27,8 @@ Figure 1. CAD of concept Drawing Bot
 |  2   | KHK-BSS0.5-60B Gears    | Robotics Club         |     -     |
 |  3   | ID 6mm OD 17mm Bearing  | Robotics Club         |     -     |
 |  2   | Stainless Bars Tools    | Robotics Club         |     -     |
-|  2   | M4 Screws               | Robotics Club         |     -     |
-|  2   | M4 Screws               | Robotics Club         |     -     |
+|  2   | M4 x 17mm Screws        | Robotics Club         |     -     |
+|  2   | M4 x 10mm Screws        | Robotics Club         |     -     |
 
 # Software Design
 An overview of the software design. This should be brief and general, with a link to your Doxygen pages -- the pages describe the details of the software, so there's no need to repeat that here.
