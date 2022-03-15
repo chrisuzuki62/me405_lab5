@@ -1,4 +1,4 @@
-# Term Project - Drawing bot
+# Term Project - Drawing Bot
 
 # System Description
 
