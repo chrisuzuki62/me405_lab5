@@ -33,6 +33,8 @@ Figure 1. CAD of concept Drawing bot
 # Software Design
 An overview of the software design. This should be brief and general, with a link to your Doxygen pages -- the pages describe the details of the software, so there's no need to repeat that here.
 
+Our program is written in micropython and consists of three tasks: two motor tasks and one plotter task. The plotter tasks runs a finite state machine, as represented by the state transition diagram............., consists of the following states: read HPGL, initialize, lifting pen up, setting pen down, and moving. When the program is run, the plotter task reads a section of the HPGL file up to the first semicolon. The first two strings of each section will determine which state the FSM will transition to next: "IN" for initialize, "PU" for lifting the pen up, "PD" for setting the pen down, etc. At their respective state, the program will carry out a function such as setting the appropriate duty cycle for the servo motor to lift the pen up. The FSM then checks to see if there is any coordinate data following the first two strings, the program will move the robot accordingly. When the robot completes all movements in the section, the FSM jumps back to the state where it reads the HPGL file for the next set of instructions. The two motor tasks are rather simple: it runs a proportional controller to set the motor in the desired position specified within the plotter task. Finally, when the program raches the end of the HPGL file, it simply enters a finish state. 
+
 Documentation of Code: https://chrisuzuki62.github.io/me405_termproject/
 
 # Results
