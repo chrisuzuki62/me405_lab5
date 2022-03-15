@@ -49,5 +49,4 @@ Overall, from the project our group has learned tp spend more time thinking of a
 Reference for concept: https://www.line-us.com/
 
 GrabCAD repository: https://workbench.grabcad.com/workbench/projects/gcqKvgfJRzyWo_CtzvtAKlI-tx9kWjHW_sFcfrkAEgMBij#/space/gcChDJD7kWcv_jVIQOxMI8suMSjF-Yvh4EW6TlkZzvZ4QA
-
-CAD Drawings: 
+Includes Part files, STL and drawings
