@@ -12,9 +12,9 @@ Our system consists of a robot arm-type system inspired by the Line-us drawing r
 
 ![test](CAD.JPG)
 
-Figure 1. CAD of concept Drawing bot
+Figure 1. CAD of concept Drawing Bot
 
-## Bill of Materials for Drawing bot
+## Bill of Materials for Drawing Bot
 
 | Qty. | Part                    | Source                | Est. Cost |
 |:----:|:----------------------  |:----------------------|:---------:|
