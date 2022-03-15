@@ -33,7 +33,7 @@ Figure 1. CAD of concept Drawing bot
 # Software Design
 An overview of the software design. This should be brief and general, with a link to your Doxygen pages -- the pages describe the details of the software, so there's no need to repeat that here.
 
-Documentation of Code:
+Documentation of Code: https://chrisuzuki62.github.io/me405_termproject/
 
 # Results
 A brief discussion of what you've learned about the project and recommendations for anyone who would like to build upon your work. This does not mean a discussion of what you learned about mechatronics in general; that belongs in other places.  It is a discussion of what worked well and what didn't for this device.
