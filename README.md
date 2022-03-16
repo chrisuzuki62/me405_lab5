@@ -20,7 +20,7 @@ Figure 1. CAD of concept Drawing Bot
 |:----:|:----------------------  |:----------------------|:---------:|
 |  2   | ME405 Pittman DC Motors | ME405 Tub             |     -     |
 |  1   | Nucleo Board with Shoe  | ME405 Tub             |     -     |
-|  1   | Tower Pro SG90 Servo   | Robotics Club         |     -     |
+|  1   | Mini Tower Pro SG90 Ser.| Robotics Club         |     -     |
 |  1   | Pen                     | Someone on Team       |     -     |
 |  1   | PLA 3D Filament         | Someone on Team       |     -     |
 |  8   | M3-8mm Screws           | REV Robotics          |     -     |
